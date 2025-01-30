@@ -209,7 +209,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/goal", async (req, res) => {
   try {
-    const { userId, goal } = req.body;
+    const { id, userId, goal } = req.body;
     if (!userId || !goal) {
       return res.status(400).json({ message: "Invalid input" });
     }
@@ -217,7 +217,6 @@ app.post("/goal", async (req, res) => {
     if (user.length === null) {
       return res.status(400).json({ message: "User not found" });
     }
-    const id = uuidv4();
     const newGoal = new Goal({ id, userId, goal });
     await newGoal.save();
     res.status(200).json(newGoal);
