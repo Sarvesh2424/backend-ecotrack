@@ -42,7 +42,7 @@ const FootPrint = mongoose.model("FootPrint", footPrintSchema);
 
 const goalSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
-  userId: { type: String, required: true, unique: true },
+  userId: { type: String, required: true },
   goal: { type: Number, required: true },
 });
 
@@ -221,6 +221,7 @@ app.post("/goal", async (req, res) => {
     await newGoal.save();
     res.status(200).json(newGoal);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: "Cannot post to database" });
   }
 });
